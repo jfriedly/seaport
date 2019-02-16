@@ -1,0 +1,17 @@
+{
+  "name": "Seaport",
+  "description": "Tools for optimizing game play of Pixel Federation's game Seaport",
+  "image": "heroku/python",
+  "repository": "https://github.com/jfriedly/seaport",
+  "keywords": ["python"],
+  "addons": [ ],
+  "env": {
+  },
+  "environments": {
+    "test": {
+      "scripts": {
+        "test": "python manage.py test"
+      }
+    }
+  }
+}
