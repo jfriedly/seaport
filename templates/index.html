@@ -1,22 +1,25 @@
-<!doctype html>
-<title>{% block title %}{% endblock %} - Flaskr</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<nav>
-  <h1>Flaskr</h1>
-  <ul>
-    {% if g.user %}
-		foo
-    {% else %}
-		bar
-    {% endif %}
-  </ul>
-</nav>
-<section class="content">
-  <header>
-    {% block header %}{% endblock %}
-  </header>
-  {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
-  {% endfor %}
-  {% block content %}{% endblock %}
-</section>
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Mission Requirements{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="cargo">Cargo</label>
+    <input name="cargo" id="cargo" required>
+    <label for="bonus">Bonus</label>
+    <input name="bonus" id="bonus" required>
+    <input type="submit" value="Submit">
+  </form>
+  {% if g.recommendation %}
+    <hr>
+    <p>Requested Capacity: {{ g.recommendation.requested_capacity }}
+    <p>Recommended Capacity: {{ g.recommendation.recommended_capacity }}
+    <ul>
+        {% for ship in g.recommendation.fleet %}
+        <li>{{ ship }}</li>
+        {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}
