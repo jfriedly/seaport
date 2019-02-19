@@ -1,1 +1,1 @@
-hello-world: python -c "print 'Hello World'"
+web: FLASK_APP=web_server.py flask run
