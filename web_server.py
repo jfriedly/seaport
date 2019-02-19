@@ -1,6 +1,7 @@
 import logging
 import os
 
+import flask
 from flask import Flask
 
 logging.basicConfig(level=logging.DEBUG)
@@ -11,4 +12,4 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return "Hello world!"
+    return flask.render_template('index.html')
