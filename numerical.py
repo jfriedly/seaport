@@ -5,7 +5,7 @@ import sys
 def subsetsum(superset, target):
     """Finds a subset of the integers in superset that sum to target"""
     res = {0 : []}
-    closest_larger = (sys.maxint, [])
+    closest_larger = (sys.maxsize, [])
     for i in superset:
         newres = dict(res)
         for v, l in res.items():
