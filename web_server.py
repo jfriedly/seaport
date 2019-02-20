@@ -1,9 +1,13 @@
 import logging
+import math
 import os
 
 import flask
 from flask import Flask
 from flask import request
+
+import fleet
+import numerical
 
 
 logging.basicConfig(level=logging.DEBUG)
@@ -14,19 +18,23 @@ app = Flask(__name__)
 
 
 class Recommendation(object):
+    recommended_fleet = []
     requested_capacity = 0
     recommended_capacity = 0
-    fleet = []
 
-    def __init__(self, requested_capacity, fleet):
+    def __init__(self, recommended_fleet, requested_capacity):
+        self.recommended_fleet = recommended_fleet
         self.requested_capacity = requested_capacity
-        self.recommended_capacity = sum(fleet)
-        self.fleet = fleet
+        self.recommended_capacity = sum(recommended_fleet)
 
 @app.route("/", methods=['GET', 'POST'])
 def hello():
-    if request.method == 'GET':
-        return flask.render_template('index.html')
-    else:
-        flask.g.recommendation = Recommendation(42, [21, 21])
-        return flask.render_template('index.html')
+    if request.method == 'POST':
+        # TODO(jfriedly):  log initial input and validate better
+        cargo = int(request.form['cargo'])
+        bonus = int(request.form['bonus'])
+        logger.info("New request. Cargo is %d, bonus is %d" % (cargo, bonus))
+        requested_capacity = math.ceil(float(cargo) / bonus)
+        recommended_fleet = numerical.subsetsum(fleet.all_ships, requested_capacity)
+        flask.g.recommendation = Recommendation(recommended_fleet, requested_capacity)
+    return flask.render_template('index.html')

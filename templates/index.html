@@ -17,7 +17,7 @@
     <p>Requested Capacity: {{ g.recommendation.requested_capacity }}
     <p>Recommended Capacity: {{ g.recommendation.recommended_capacity }}
     <ul>
-        {% for ship in g.recommendation.fleet %}
+        {% for ship in g.recommendation.recommended_fleet %}
         <li>{{ ship }}</li>
         {% endfor %}
     </ul>
