@@ -34,7 +34,7 @@ def hello():
         cargo = int(request.form['cargo'])
         bonus = int(request.form['bonus'])
         logger.info("New request. Cargo is %d, bonus is %d" % (cargo, bonus))
-        requested_capacity = math.ceil(float(cargo) / bonus)
+        requested_capacity = int(math.ceil(float(cargo) / bonus))
         recommended_fleet = numerical.subsetsum(fleet.all_ships, requested_capacity)
         flask.g.recommendation = Recommendation(recommended_fleet, requested_capacity)
     return flask.render_template('index.html')

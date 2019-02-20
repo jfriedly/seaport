@@ -14,8 +14,12 @@
   </form>
   {% if g.recommendation %}
     <hr>
-    <p>Requested Capacity: {{ g.recommendation.requested_capacity }}
+    <p>Requested Capacity: <b>{{ g.recommendation.requested_capacity }}</b>
+    {% if g.recommendation.requested_capacity != g.recommendation.recommended_capacity %}
+    <p>Recommended Capacity: <b>{{ g.recommendation.recommended_capacity }}</b>
+    {% else %}
     <p>Recommended Capacity: {{ g.recommendation.recommended_capacity }}
+    {% endif %}
     <ul>
         {% for ship in g.recommendation.recommended_fleet %}
         <li>{{ ship }}</li>
