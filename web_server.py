@@ -31,10 +31,11 @@ class Recommendation(object):
 def hello():
     if request.method == 'POST':
         # TODO(jfriedly):  log initial input and validate better
-        cargo = int(request.form['cargo'])
+        delivered = int(request.form['delivered'])
+        total = int(request.form['total'])
         bonus = int(request.form['bonus'])
-        logger.info("New request. Cargo is %d, bonus is %d" % (cargo, bonus))
-        requested_capacity = int(math.ceil(float(cargo) / bonus))
+        logger.info("New request. Delivered %d / %d, bonus is %d" % (delivered, total, bonus))
+        requested_capacity = int(math.ceil(float(total - delivered) / bonus))
         recommended_fleet = numerical.subsetsum(fleet.all_ships, requested_capacity)
         flask.g.recommendation = Recommendation(recommended_fleet, requested_capacity)
     return flask.render_template('index.html')

@@ -6,9 +6,11 @@
 
 {% block content %}
   <form method="post">
-    <label for="cargo">Cargo</label>
-    <input name="cargo" id="cargo" required>
-    <label for="bonus">Bonus</label>
+    <label for="delivered">Already Delivered</label>
+    <input name="delivered" id="delivered">
+    <label for="total"> of total </label>
+    <input name="total" id="total" required>
+    <label for="bonus">. Bonus</label>
     <input name="bonus" id="bonus" required>
     <input type="submit" value="Submit">
   </form>
